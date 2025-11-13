@@ -94,8 +94,38 @@ server.listen(PORT)
 
 ### Corpo da Requisição em JSON (Stream & Buffers)
 
-- **Insomnia:** Rest Client para testes de APIs
+- Como toda **requisição** é uma **Readable Stream**
+
+- Utilização de **Streams** e **Buffers** para 
+  construir o **corpo da requisição**
+
+    ***const buffers = []***
+    
+    ***for await (const chunk of request){***
+    
+    ***buffers.push(chunk)***
+    
+    ***}***
+
+    ***try{***
+
+    ***request.body = JSON.parse(Buffer.concat(buffers).toString())***
+ 
+    ***}catch(error){***
+ 
+    ***request.body = null***
+
+    ***}***
+
+- **Insomnia:** Rest Client para testes de APIs 
 
 - Criação de ***requisições***
 
 - Outras alternativas: **Postman**
+
+- Quando utilizamos **Streams** para enviar dados para a **API**
+  a informação é construída como um arquivo de **texto**
+
+- Para converter para **.JSON**, utilizamos:
+
+    > ***JSON.parse(<string>)***

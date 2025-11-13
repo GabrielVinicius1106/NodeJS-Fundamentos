@@ -14,27 +14,45 @@ class User {
 
 const users = []
     
-const server = createServer((request, response) => {
+const server = createServer(async (request, response) => {
     
     const { method, url } = request
+    const buffers = []
 
+    for await (const chunk of request){
+        buffers.push(chunk)
+    }
+
+    // O corpo da requisição é um arquivo de texto
+    // Convertemos para JSON utilizando:
+
+    // JSON.parse(<string>)
+    
+    try{
+        request.body = JSON.parse(Buffer.concat(buffers).toString())
+    }catch(error){
+
+        console.log("Corpo da requisição VAZIO!");
+
+        request.body = null
+    }
+    
     if(method === "GET" && url === "/users"){
-        // LISTAGEM DE USUÁRIOS 
+        // LISTAGEM DE USUÁRIOS
+
         return response.setHeader('Content-type','application/json').end(JSON.stringify(users))
     }
 
     if(method == "POST" && url === "/users"){
         // CRIAÇÃO DE USUÁRIO
 
-        users.push(new User(randomUUID(),"Teste da Silva", "abc@email.com"))
+        const { name, email } = request.body
 
-        if(users){
-            console.clear()
-
-            for(let user of users){
-                console.log(user);
-            }
-        }
+        users.push({
+            id: 1,
+            name,
+            email
+        })
 
         return response.writeHead(201).end("OK!")
     }
