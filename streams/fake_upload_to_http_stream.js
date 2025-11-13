@@ -29,4 +29,3 @@ fetch("http://localhost:3334", {
 }).then((data) => {
     console.log(data); // Finalmente retorna os DADOS contidos na RESPONSE
 })
-

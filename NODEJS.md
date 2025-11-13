@@ -19,8 +19,6 @@
     "dev": "node --watch server.js"
 }
 
-
-
 ### Criando um Servidor
 
 - Iniciando um servidor com **NodeJS PURO**
@@ -94,3 +92,10 @@ server.listen(PORT)
 
 - **Requests** e **Responses** são **Streams**, pois são modelos de ***entrada*** e ***saída***
 
+### Corpo da Requisição em JSON (Stream & Buffers)
+
+- **Insomnia:** Rest Client para testes de APIs
+
+- Criação de ***requisições***
+
+- Outras alternativas: **Postman**
