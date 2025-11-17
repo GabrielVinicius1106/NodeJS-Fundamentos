@@ -129,3 +129,52 @@ server.listen(PORT)
 - Para converter para **.JSON**, utilizamos:
 
     > ***JSON.parse(<string>)***
+
+### Buffers:
+
+- Representação de um espaço na memória
+
+- Usado para transferência de dados de maneira ***performática***
+
+- Utiliza vetores de **BYTES** representados em **HEXADECIMAL**
+
+- O tipo **Buffer**, recebe ***strings***
+
+    ***Buffer.from(<string>)*** => Converte a string para um **Buffer**
+
+### Criando Middleware de JSON
+
+- **Interceptador** que recebe como parâmetro ***requisições*** e ***responses***, e manipula estas informações
+
+### Criando BANCO DE DADOS
+
+- **#** em um ***atributo*** torna ele privado, ou seja, visível
+  somente no escopo da **classe**
+
+- ***#database = {}***
+
+### Rotas da Aplicação
+
+- Criamos um **ARRAY** de ***ROTAS***, onde executamos o ***handler*** com base nos parâmetros **method** e **path**
+
+- ***const routes = [{ method: "POST", path: "/users", handler: (request, response) => {<action>}}]***
+
+### Route e Query Parameters
+
+- **QUERY Parameters** (parâmetros nomeados) : ***Parâmetros*** enviados na ***URL***
+    
+    - Utilizados em ***URLs Stateful*** => Não-Sensíveis,  Filtros, Paginação
+
+    > Ex: **http://localhost:3333/users?user_id=1&user_email=abc@email.com**
+
+        > user_id
+        > user_email
+
+
+- **ROUTE Parameters** (parâmetros não nomeados) : ***Parâmetros*** enviados na ***URL***
+
+    - Utilizados em ***URLs Stateless*** => Acesso a ***Recursos na Aplicação***, Não-Sensíveis
+
+    > Ex: **http://localhost:3333/users/1**
+
+- **REQUEST Body** : 

@@ -1,60 +1,25 @@
 // "createServer()" cria um servidor
-import { randomUUID } from "node:crypto"
 import { createServer } from "node:http"
+import { json } from "./middlewares/json.js"
+import { routes } from "./routes.js"
 
 const PORT = 3333
-
-class User {
-    constructor(id, name, email){
-        this.id = id
-        this.name = name
-        this.email = email
-    }
-}
-
-const users = []
     
 const server = createServer(async (request, response) => {
     
     const { method, url } = request
-    const buffers = []
-
-    for await (const chunk of request){
-        buffers.push(chunk)
-    }
-
-    // O corpo da requisição é um arquivo de texto
-    // Convertemos para JSON utilizando:
-
-    // JSON.parse(<string>)
     
-    try{
-        request.body = JSON.parse(Buffer.concat(buffers).toString())
-    }catch(error){
+    await json(request, response)
 
-        console.log("Corpo da requisição VAZIO!");
+    // Retorna o primeiro objeto "route"
+    const route = routes.find((route) => {
+        return route.method == method && route.path == url
+    })
 
-        request.body = null
-    }
-    
-    if(method === "GET" && url === "/users"){
-        // LISTAGEM DE USUÁRIOS
+    console.log(route);
 
-        return response.setHeader('Content-type','application/json').end(JSON.stringify(users))
-    }
-
-    if(method == "POST" && url === "/users"){
-        // CRIAÇÃO DE USUÁRIO
-
-        const { name, email } = request.body
-
-        users.push({
-            id: 1,
-            name,
-            email
-        })
-
-        return response.writeHead(201).end("OK!")
+    if(route){
+        return route.handler(request, response)
     }
 
     // RETORNA "NOT FOUND"
@@ -62,5 +27,5 @@ const server = createServer(async (request, response) => {
 })
 
 server.listen(PORT, () => {
-    console.log(`Server running on PORT: ${PORT}`);
+    return `Server running on PORT: ${PORT}`
 })
