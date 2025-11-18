@@ -13,7 +13,7 @@ const server = createServer(async (request, response) => {
 
     // Retorna o primeiro objeto "route"
     const route = routes.find((route) => {
-        return route.method == method && route.path == url
+        return route.method == method && route.path.test(url)
     })
 
     console.log(route);

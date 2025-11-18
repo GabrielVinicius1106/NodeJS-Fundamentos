@@ -102,19 +102,13 @@ server.listen(PORT)
     ***const buffers = []***
     
     ***for await (const chunk of request){***
-    
-    ***buffers.push(chunk)***
-    
+        ***buffers.push(chunk)***
     ***}***
 
     ***try{***
-
-    ***request.body = JSON.parse(Buffer.concat(buffers).toString())***
- 
+        ***request.body = JSON.parse(Buffer.concat(buffers).toString())***
     ***}catch(error){***
- 
-    ***request.body = null***
-
+        ***request.body = null***
     ***}***
 
 - **Insomnia:** Rest Client para testes de APIs 
@@ -163,7 +157,7 @@ server.listen(PORT)
 
 - **QUERY Parameters** (parâmetros nomeados) : ***Parâmetros*** enviados na ***URL***
     
-    - Utilizados em ***URLs Stateful*** => Não-Sensíveis,  Filtros, Paginação
+    - Utilizados em ***URLs Stateful*** => Não-Sensíveis, Filtros, Paginação
 
     > Ex: **http://localhost:3333/users?user_id=1&user_email=abc@email.com**
 
@@ -177,4 +171,8 @@ server.listen(PORT)
 
     > Ex: **http://localhost:3333/users/1**
 
-- **REQUEST Body** : 
+- **REQUEST Body** :
+
+    - Envio de **Informações de Formulário** (HTTPS) (Dados Sensíveis)
+
+### 
