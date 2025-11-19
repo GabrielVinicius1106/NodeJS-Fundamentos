@@ -1,7 +1,9 @@
 // "createServer()" cria um servidor
+
 import { createServer } from "node:http"
 import { json } from "./middlewares/json.js"
 import { routes } from "./routes.js"
+import { buildRoutePath } from "./utils/buildRoutePath.js"
 
 const PORT = 3333
     
@@ -16,9 +18,12 @@ const server = createServer(async (request, response) => {
         return route.method == method && route.path.test(url)
     })
 
-    console.log(route);
-
     if(route){
+
+        const routeParams = request.url.match(route.path)
+
+        request.params = { ...routeParams.groups }
+
         return route.handler(request, response)
     }
 

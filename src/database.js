@@ -51,5 +51,30 @@ export class Database {
         }
 
         this.#persist()
+
+        return data
+    }
+
+    update(table, id, data){
+
+        const userIndex = this.#database[table].findIndex((user) => user.id === id)
+
+        if(userIndex > -1){
+            this.#database[table][userIndex] = { id, ...data }
+            this.#persist()
+        }
+
+    }
+
+    // Método para DELETAR USUÁRIOS
+    delete(table, id){
+        
+        const userIndex = this.#database[table].findIndex((user) => user.id === id)
+
+        if(userIndex > -1){
+            this.#database[table].splice(userIndex, 1) // Remove Usuário do Banco de Dados
+            this.#persist()
+        }
+        
     }
 }

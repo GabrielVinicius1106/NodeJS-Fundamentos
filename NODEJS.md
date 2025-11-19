@@ -175,4 +175,7 @@ server.listen(PORT)
 
     - Envio de **Informações de Formulário** (HTTPS) (Dados Sensíveis)
 
-### 
+### Criação de Regex p/ Route Parâmetros
+
+- **Regex:** : Expresão Regular utilizada para ***filtro*** de ***strings*** e              ***substrings***, etc.
+
